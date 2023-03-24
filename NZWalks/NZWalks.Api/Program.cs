@@ -1,7 +1,15 @@
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
+using NZWalks.Api.Data;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
+builder.Services.AddDbContext<NZWalksDbcontext>(Options =>
+{
+    Options.UseSqlServer(builder.Configuration.GetConnectionString("NZWalks"));
+});
 
 var app = builder.Build();
 
